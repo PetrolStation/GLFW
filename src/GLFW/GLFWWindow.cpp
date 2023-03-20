@@ -1,5 +1,8 @@
 #include <PCH.h>
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include <utility>
 #include "Static/Window/Window.h"
 #include "GLFWWindow.h"
@@ -51,7 +54,9 @@ namespace PetrolEngine {
             { Keys::KeyU, GLFW_KEY_U },
             { Keys::KeyV, GLFW_KEY_V },
             { Keys::KeyW, GLFW_KEY_W },
-            { Keys::KeyX, GLFW_KEY_X }
+            { Keys::KeyX, GLFW_KEY_X },
+            { Keys::KeyEscape, GLFW_KEY_ESCAPE},
+            { Keys::KeyLeftShift, GLFW_KEY_LEFT_SHIFT}
     };
     UnorderedMap<int, Keys> glfwKeyToKey = reverseMap(keyToGlfwKey);
 
@@ -93,10 +98,7 @@ namespace PetrolEngine {
 //        );
     }
     void error_callback(int error, const char* msg) {
-        std::string s;
-        s = " [" + std::to_string(error) + "] " + msg + '\n';
-        LOG(s,3);
-        std::cerr << s << std::endl;
+        LOG(" [" + std::to_string(error) + "] " + msg + '\n',3);
     }
     int GLFWWindow::init() { LOG_FUNCTION();
         int success = glfwInit();
@@ -113,6 +115,9 @@ namespace PetrolEngine {
             glfwTerminate();
             return 0;
         }
+
+        glfwMakeContextCurrent(window);
+        Renderer::createGraphicsContext()->init((void*)glfwGetProcAddress);
 
         glfwSetWindowUserPointer(window, &windowData);
         glfwSetWindowSizeCallback(window, [](GLFWwindow* windowPtr, int newWidth, int newHeight) {
@@ -172,9 +177,6 @@ namespace PetrolEngine {
         );
 
         glfwMakeContextCurrent(window);
-
-        if (Renderer::createGraphicsContext()->init((void*)glfwGetProcAddress))
-            return -1;
 
         glfwSetTime( 0.0 );
 
