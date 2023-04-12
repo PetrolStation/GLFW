@@ -7,5 +7,7 @@ namespace PetrolEngine {
     class GLFW_: public WindowResourceCreator {
     public:
         WindowApi* newWindow(int width, int height, const String& title) override { return new GLFWWindow(width, height, title); }
-    } GLFW;
+    };
+
+    extern GLFW_ GLFW;
 }
