@@ -118,7 +118,7 @@ namespace PetrolEngine {
 
         glfwMakeContextCurrent(window);
         Renderer::createGraphicsContext()->init((void*)glfwGetProcAddress);
-
+        std::cout<<glGetString(GL_VERSION)<<"\n";
         glfwSetWindowUserPointer(window, &windowData);
         glfwSetWindowSizeCallback(window, [](GLFWwindow* windowPtr, int newWidth, int newHeight) {
                 auto* newWindowData = reinterpret_cast<WindowData*>(glfwGetWindowUserPointer(windowPtr));
