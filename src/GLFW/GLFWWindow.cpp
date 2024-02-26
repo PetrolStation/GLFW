@@ -109,7 +109,7 @@ namespace PetrolEngine {
         glfwSetErrorCallback(error_callback);
 
         window = glfwCreateWindow(windowData.width, windowData.height, windowData.title.c_str(), nullptr, nullptr);
-
+        i_window = window;
         if (!window) {
             LOG("Window failed to create" , 3);
             glfwTerminate();
