@@ -56,7 +56,8 @@ namespace PetrolEngine {
             { Keys::KeyW, GLFW_KEY_W },
             { Keys::KeyX, GLFW_KEY_X },
             { Keys::KeyEscape, GLFW_KEY_ESCAPE},
-            { Keys::KeyLeftShift, GLFW_KEY_LEFT_SHIFT}
+            { Keys::KeyLeftShift, GLFW_KEY_LEFT_SHIFT},
+            { Keys::KeyLeftControl, GLFW_KEY_LEFT_CONTROL}
     };
     UnorderedMap<int, Keys> glfwKeyToKey = reverseMap(keyToGlfwKey);
 
